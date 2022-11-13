@@ -10,7 +10,7 @@ class ExpressionEvaluatorTest {
 
     @Test
     void testEvaluate() {
-        assertEquals(4,ExpressionEvaluator.evaluate("(2+2)"));
+        assertEquals(4,ExpressionEvaluator.evaluate("( 2 + 2 )"));
     }
 
     @Test

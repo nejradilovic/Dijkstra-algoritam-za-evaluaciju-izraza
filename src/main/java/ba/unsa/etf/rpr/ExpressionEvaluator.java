@@ -6,40 +6,32 @@ import static java.lang.Double.parseDouble;
 public class ExpressionEvaluator {
     private static final Stack<String> operators = new Stack<String>();
     private static final Stack<Double> operands = new Stack<Double>();
-    private static final String LEFT_PARENTHESIS = "(";
-    private static final String RIGHT_PARENTHESIS = ")";
-    private static final String PLUS = "+";
-    private static final String MINUS = "-";
-    private static final String MULT = "*";
-    private static final String DIV = "/";
-    private static final String POW = "^";
-    private static final String SQRT = "sqrt";
     public static double evaluate(String s){
         String[] strSub = s.split(" ");
         for(String x: strSub) {
             validExpression(x);
-            if (x.equals(LEFT_PARENTHESIS)) continue;
+            if (x.equals("(")) continue;
             else if (isOperator(x)) operators.push(x);
-            else if (x.equals(RIGHT_PARENTHESIS)) {
+            else if (x.equals(")")) {
                 String operator = operators.pop();
                 double operand = operands.pop();
                 switch (operator) {
-                    case PLUS:
+                    case "+":
                         operand = operands.pop() + operand;
                         break;
-                    case MINUS:
+                    case "-":
                         operand = operands.pop() - operand;
                         break;
-                    case MULT:
+                    case "*":
                         operand = operands.pop() * operand;
                         break;
-                    case DIV:
+                    case "/":
                         operand = operands.pop() / operand;
                         break;
-                    case POW:
+                    case "^":
                         operand = Math.pow(operand, operand);
                         break;
-                    case SQRT:
+                    case "sqrt":
                         operand = Math.sqrt(operand);
                         break;
                 }
@@ -49,10 +41,10 @@ public class ExpressionEvaluator {
         return operands.pop();
 }
 static void validExpression(String s) throws RuntimeException{
-        if(!isOperator(s) && !isNumber(s) && !LEFT_PARENTHESIS.equals(s) && !RIGHT_PARENTHESIS.equals(s)) throw new RuntimeException(errorMessage);
+        if(!isOperator(s) && !isNumber(s) && !s.equals("(") && !s.equals(")") && !(s.length()>1 && s.equals("sqrt"))  ) throw new RuntimeException(errorMessage);
 }
     public static boolean isOperator(String s) {
-        if(!PLUS.equals(s) && !MINUS.equals(s) && !DIV.equals(s) && !MULT.equals(s) && !POW.equals(s) && !SQRT.equals(s)) return false;
+        if(!s.equals("+") && !s.equals("-") && !s.equals("/") && !s.equals("*") && !s.equals("^") && !s.equals("sqrt")) return false;
         return true;
     }
     public static boolean isNumber(String s) {
