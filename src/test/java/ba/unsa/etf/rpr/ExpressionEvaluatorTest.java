@@ -6,13 +6,19 @@ import org.junit.jupiter.api.function.Executable;
 import static org.junit.jupiter.api.Assertions.*;
 import static ba.unsa.etf.rpr.ExpressionEvaluator.*;
 
+/**
+ * ExpressionEvaluatorTest class that tests our functions and evaluator algorithm
+ */
 class ExpressionEvaluatorTest {
 
     @Test
     void testEvaluate() {
         assertEquals(4,ExpressionEvaluator.evaluate("( 2 + 2 )"));
     }
-
+    @Test
+    void testEvaluate1() {
+        assertEquals(10,ExpressionEvaluator.evaluate("( 25 - ( 5 * 3 ) )"));
+    }
     @Test
     void testValidExpression() {
         assertThrows(RuntimeException.class, () -> validExpression(" "),errorMessage);

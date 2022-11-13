@@ -3,9 +3,19 @@ import java.util.Stack;
 
 import static java.lang.Double.parseDouble;
 
+/**
+ * ExpressionEvaluator class that has two Stacks as attributes
+ * It computes the value of arithmetic expressions etc. ( 1 + ( (2 + 3 ) * ( 4 * 5 ) ) )
+ * @author Nejra Adilović
+ */
 public class ExpressionEvaluator {
     private static final Stack<String> operators = new Stack<String>();
     private static final Stack<Double> operands = new Stack<Double>();
+    /**
+     * evaluate method that calculates expressions using Dijkstra’s Algorithm for expression evaluation
+     * @param s
+     * @return result of expression
+     */
     public static double evaluate(String s){
         String[] strSub = s.split(" ");
         for(String x: strSub) {
@@ -40,13 +50,31 @@ public class ExpressionEvaluator {
         }
         return operands.pop();
 }
-static void validExpression(String s) throws RuntimeException{
+
+    /**
+     * Checks if the given string is in valid format
+     * @param s
+     * @throws RuntimeException if the expression isn't valid
+     */
+    static void validExpression(String s) throws RuntimeException{
         if(!isOperator(s) && !isNumber(s) && !s.equals("(") && !s.equals(")") && !(s.length()>1 && s.equals("sqrt"))  ) throw new RuntimeException(errorMessage);
 }
+
+    /**
+     *
+     * @param s
+     * @return true if the given string is a valid operator
+     */
     public static boolean isOperator(String s) {
         if(!s.equals("+") && !s.equals("-") && !s.equals("/") && !s.equals("*") && !s.equals("^") && !s.equals("sqrt")) return false;
         return true;
     }
+
+    /**
+     * Checks if the given string is a real number
+     * @param s
+     * @return true if given string is a real number, otherwise return false
+     */
     public static boolean isNumber(String s) {
         double integerValue;
         if (s == null || s.equals("")) {
@@ -59,5 +87,9 @@ static void validExpression(String s) throws RuntimeException{
             return false;
         }
     }
+
+    /**
+     * Error message if the received input is invalid
+     */
     public static String errorMessage = "Invalid input!";
 }
