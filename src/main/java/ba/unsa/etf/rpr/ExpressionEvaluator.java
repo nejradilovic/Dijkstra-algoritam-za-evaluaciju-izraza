@@ -1,6 +1,6 @@
 package ba.unsa.etf.rpr;
 import java.util.Stack;
-
+import java.lang.Math;
 import static java.lang.Double.parseDouble;
 
 /**
@@ -32,14 +32,11 @@ public class ExpressionEvaluator {
                     case "-":
                         operand = operands.pop() - operand;
                         break;
-                    case "*":
+                    case "x":
                         operand = operands.pop() * operand;
                         break;
                     case "/":
                         operand = operands.pop() / operand;
-                        break;
-                    case "^":
-                        operand = Math.pow(operand, operand);
                         break;
                     case "sqrt":
                         operand = Math.sqrt(operand);
@@ -57,7 +54,7 @@ public class ExpressionEvaluator {
      * @throws RuntimeException if the expression isn't valid
      */
     static void validExpression(String s) throws RuntimeException{
-        if(!isOperator(s) && !isNumber(s) && !s.equals("(") && !s.equals(")") && !(s.length()>1 && s.equals("sqrt"))  ) throw new RuntimeException(errorMessage);
+        if(!s.equals("(") && !isOperator(s) && !isNumber(s) && !s.equals(")") ) throw new RuntimeException(errorMessage);
 }
 
     /**
@@ -66,7 +63,7 @@ public class ExpressionEvaluator {
      * @return true if the given string is a valid operator
      */
     public static boolean isOperator(String s) {
-        if(!s.equals("+") && !s.equals("-") && !s.equals("/") && !s.equals("*") && !s.equals("^") && !s.equals("sqrt")) return false;
+        if(!s.equals("+") && !s.equals("-") && !s.equals("/") && !s.equals("x") && !s.equals("sqrt")) return false;
         return true;
     }
 

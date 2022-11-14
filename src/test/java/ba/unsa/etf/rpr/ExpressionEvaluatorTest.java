@@ -17,7 +17,15 @@ class ExpressionEvaluatorTest {
     }
     @Test
     void testEvaluate1() {
-        assertEquals(10,ExpressionEvaluator.evaluate("( 25 - ( 5 * 3 ) )"));
+        assertEquals(10,ExpressionEvaluator.evaluate("( 25 - ( 5 x 3 ) )"));
+    }
+    @Test
+    void testEvaluate2() {
+        assertEquals(4,ExpressionEvaluator.evaluate("( 24 / ( 2 x 3 ) )"));
+    }
+    @Test
+    void testEvaluate3() {
+        assertEquals(4,ExpressionEvaluator.evaluate("( sqrt 16 )"));
     }
     @Test
     void testValidExpression() {
