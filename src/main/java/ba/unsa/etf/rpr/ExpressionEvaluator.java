@@ -5,12 +5,15 @@ import static java.lang.Double.parseDouble;
 
 /**
  * ExpressionEvaluator class that has two Stacks as attributes
- * It computes the value of arithmetic expressions etc. ( 1 + ( (2 + 3 ) * ( 4 * 5 ) ) )
+ * It computes the value of arithmetic expressions etc. ( 1 + ( ( 2 + 3 ) * ( 4 * 5 ) ) )
  * @author Nejra Adilović
+ * @version 1.0
  */
 public class ExpressionEvaluator {
     private static final Stack<String> operators = new Stack<String>();
     private static final Stack<Double> operands = new Stack<Double>();
+    private static int leftParenthesis = 0, rightParenthesis = 0;
+
     /**
      * evaluate method that calculates expressions using Dijkstra’s Algorithm for expression evaluation
      * @param s
@@ -20,9 +23,15 @@ public class ExpressionEvaluator {
         String[] strSub = s.split(" ");
         for(String x: strSub) {
             validExpression(x);
-            if (x.equals("(")) continue;
+            if (x.equals("(")) {
+                leftParenthesis = leftParenthesis + 1;
+                continue;
+            }
             else if (isOperator(x)) operators.push(x);
             else if (x.equals(")")) {
+                leftParenthesis = leftParenthesis - 1;
+                rightParenthesis = rightParenthesis + 1;
+                if(operators.size()>operands.size()) throw new RuntimeException(errorMessage);
                 String operator = operators.pop();
                 double operand = operands.pop();
                 switch (operator) {
@@ -36,6 +45,7 @@ public class ExpressionEvaluator {
                         operand = operands.pop() * operand;
                         break;
                     case "/":
+                        if(operand == 0) throw new RuntimeException("Division by zero is not possible!");
                         operand = operands.pop() / operand;
                         break;
                     case "sqrt":
@@ -44,7 +54,9 @@ public class ExpressionEvaluator {
                 }
                 operands.push(operand);
             } else operands.push(parseDouble(x));
+            if(leftParenthesis<operators.size()) throw new RuntimeException(errorMessage);
         }
+        if(operators.size() > 0 || operands.size() != 1) throw new RuntimeException(errorMessage);
         return operands.pop();
 }
 

@@ -1,5 +1,6 @@
 package ba.unsa.etf.rpr;
 
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.function.Executable;
 
@@ -27,6 +28,11 @@ class ExpressionEvaluatorTest {
     void testEvaluate3() {
         assertEquals(4,ExpressionEvaluator.evaluate("( sqrt 16 )"));
     }
+    @Test
+    void testEvaluate4() {
+        assertEquals(11,ExpressionEvaluator.evaluate("( 2 + ( 3 x ( sqrt 9 ) ) )"));
+    }
+
     @Test
     void testValidExpression() {
         assertThrows(RuntimeException.class, () -> validExpression(" "),errorMessage);
