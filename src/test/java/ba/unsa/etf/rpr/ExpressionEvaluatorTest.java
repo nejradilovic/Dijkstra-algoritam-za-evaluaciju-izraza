@@ -24,6 +24,7 @@ class ExpressionEvaluatorTest {
     void testEvaluate2() {
         assertEquals(4,ExpressionEvaluator.evaluate("( 24 / ( 2 x 3 ) )"));
     }
+
     @Test
     void testEvaluate3() {
         assertEquals(4,ExpressionEvaluator.evaluate("( sqrt 16 )"));
@@ -32,6 +33,8 @@ class ExpressionEvaluatorTest {
     void testEvaluate4() {
         assertEquals(11,ExpressionEvaluator.evaluate("( 2 + ( 3 x ( sqrt 9 ) ) )"));
     }
+
+
 
     @Test
     void testValidExpression() {

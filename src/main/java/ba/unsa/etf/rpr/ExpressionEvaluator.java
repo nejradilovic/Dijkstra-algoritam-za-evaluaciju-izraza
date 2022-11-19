@@ -21,17 +21,15 @@ public class ExpressionEvaluator {
      */
     public static double evaluate(String s){
         String[] strSub = s.split(" ");
+        if(!strSub[0].equals("(") || s.contains("  ")) throw new RuntimeException(errorMessage);
         for(String x: strSub) {
             validExpression(x);
-            if (x.equals("(")) {
-                leftParenthesis = leftParenthesis + 1;
-                continue;
-            }
+            if (!x.equalsIgnoreCase("sqrt") && !isNumber(x) && x.length() != 1)  throw new RuntimeException(errorMessage);
+            if (x.equals("("))  leftParenthesis = leftParenthesis + 1;
             else if (isOperator(x)) operators.push(x);
             else if (x.equals(")")) {
-                leftParenthesis = leftParenthesis - 1;
                 rightParenthesis = rightParenthesis + 1;
-                if(operators.size()>operands.size()) throw new RuntimeException(errorMessage);
+                if(operators.empty() || operands.empty()) throw new RuntimeException(errorMessage);
                 String operator = operators.pop();
                 double operand = operands.pop();
                 switch (operator) {
@@ -49,14 +47,14 @@ public class ExpressionEvaluator {
                         operand = operands.pop() / operand;
                         break;
                     case "sqrt":
+                        if(operand < 0) throw new RuntimeException("Square root of a negative number does not have a solution in the set of real numbers!");
                         operand = Math.sqrt(operand);
                         break;
                 }
                 operands.push(operand);
             } else operands.push(parseDouble(x));
-            if(leftParenthesis<operators.size()) throw new RuntimeException(errorMessage);
         }
-        if(operators.size() > 0 || operands.size() != 1) throw new RuntimeException(errorMessage);
+        if(operators.size() > 0 || operands.size() != 1 || leftParenthesis!=rightParenthesis) throw new RuntimeException(errorMessage);
         return operands.pop();
 }
 
@@ -75,7 +73,7 @@ public class ExpressionEvaluator {
      * @return true if the given string is a valid operator
      */
     public static boolean isOperator(String s) {
-        if(!s.equals("+") && !s.equals("-") && !s.equals("/") && !s.equals("x") && !s.equals("sqrt")) return false;
+        if(!s.equals("+") && !s.equals("-") && !s.equals("/") && !s.equals("x") && !s.equalsIgnoreCase("sqrt")) return false;
         return true;
     }
 
