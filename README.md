@@ -1,5 +1,4 @@
 # Zadaća iz predmeta "Razvoj programskih rješenja"
-# OPIS ZADATKA
 Potrebno je napraviti Java Maven konzolnu aplikaciju koja će se koristiti za parsiranje i izračunavanje artmetičkih izraza korištenjem Dijkstra algoritma za evaluaciju izraza opisanog u paragrafu ispod. 
 
 Za implementaciju je potrebno uraditi slijedeće:
@@ -13,3 +12,5 @@ Ulazna klasa s main metodom kora biti deklarisana u maven jar pluginu kako bi se
 U slučaju da uneseni izraz nije aritmetički validan program treba da baci izuzetak tipa RuntimeException. Jedan od unit testova mora pokriti ovaj slučaj. 
 Potrebno je uraditi samo implementaciju algoritma za izraze koji su omeđeni zagradama i koji nema podršku za prioritet operatora. 
 Možete pretpostaviti da će svi izrazi biti razdvojeni spaceom radi lakšeg parsiranja ulaznog izraza. Izraz ( 1 + ( 5 * 20 ) ) se smatra validnim dok se izraz ( 1 + ( 5* 20)) smatra nevalidnim.
+<h3 align="left">Languages and Tools:</h3>
+<p align="left"> <a href="https://www.java.com" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/java/java-original.svg" alt="java" width="40" height="40"/> </a> </p>
